@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,13 +27,15 @@ public class Product implements Serializable {
 	private String decription;
 	private double price;
 	private String imgUrl;
-
+	
 	@ManyToMany
-	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id")
+			)
 	private Set<Category> categories = new HashSet<>();
-
-	public Product() {
-	}
+	
+	
+	public Product(){}
 
 	public Product(Long id, String name, String decription, double price, String imgUrl) {
 		super();
