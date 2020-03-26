@@ -12,49 +12,49 @@ import com.i9develop.couse.entities.pk.OrderItemPK;
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
-	
+
 	private Integer quantity;
 	private Double price;
-	
+
 	public OrderItem() {
-		
+
 	}
 
-	public OrderItem(Order order ,Product product,Integer quantity, Double price) {
+	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
-		
+
 		id.setOrder(order);
 		id.setProduct(product);
-		
+
 		this.quantity = quantity;
 		this.price = price;
 	}
-	
+
 	@JsonIgnore
 	public Order getOrder() {
-		
+
 		return id.getOrder();
 	}
-	
+
 	public void SetOrder(Order order) {
 		id.setOrder(order);
 	}
+
 	
-public Product getProduct() {
-		
+	public Product getProduct() {
+
 		return id.getProduct();
 	}
 
-public void SetProduct(Product product) {
-	id.setProduct(product);
-}
-	
+	public void SetProduct(Product product) {
+		id.setProduct(product);
+	}
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -95,11 +95,5 @@ public void SetProduct(Product product) {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-
-	
 
 }
