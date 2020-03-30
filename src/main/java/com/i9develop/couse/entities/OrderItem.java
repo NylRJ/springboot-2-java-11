@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.i9develop.couse.entities.pk.OrderItemPK;
 
 @Entity
-@Table(name = "tb_order_item")
+@Table(name = "tb_order_items")
 public class OrderItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -69,6 +69,10 @@ public class OrderItem implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	public Double getSubTotal() {
+		
+		return this.price * this.quantity;
 	}
 
 	@Override
