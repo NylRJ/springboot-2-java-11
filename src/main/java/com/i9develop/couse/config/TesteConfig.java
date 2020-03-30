@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.i9develop.couse.entities.Category;
 import com.i9develop.couse.entities.Order;
 import com.i9develop.couse.entities.OrderItem;
+import com.i9develop.couse.entities.Payment;
 import com.i9develop.couse.entities.Product;
 import com.i9develop.couse.entities.User;
 import com.i9develop.couse.entities.enums.OrderStatus;
@@ -84,6 +85,11 @@ public class TesteConfig implements CommandLineRunner{
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		
 		oderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		Payment payment = new Payment(null,Instant.parse("2019-06-20T19:53:07Z"),o1);
+		
+		o1.setPayment(payment);
+		orderRepository.save(o1);
 	}
 
 }
