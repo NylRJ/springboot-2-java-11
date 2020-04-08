@@ -1,7 +1,5 @@
 package com.i9develop.couse.services;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,20 +11,16 @@ import com.i9develop.couse.repositories.CategoryRepository;
 
 @Service
 public class CategoryService {
-	
+
 	@Autowired
-	private CategoryRepository userRepository;
+	private CategoryRepository repository;
 	
-	public List<Category> findAll(){
-		
-		return userRepository.findAll();
+	public List<Category> findAll() {
+		return repository.findAll();
 	}
 	
 	public Category findById(Long id) {
-		
-		Optional<Category> obj = userRepository.findById(id);
-		
+		Optional<Category> obj = repository.findById(id);
 		return obj.get();
 	}
-
 }

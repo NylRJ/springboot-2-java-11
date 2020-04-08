@@ -13,26 +13,21 @@ import com.i9develop.couse.entities.Category;
 import com.i9develop.couse.services.CategoryService;
 
 @RestController
-@RequestMapping(value ="/categories")
+@RequestMapping(value = "/categories")
 public class CategoryResource {
-	
-	@Autowired
+
+	@Autowired 
 	private CategoryService service;
-
-	@GetMapping 
+	
+	@GetMapping
 	public ResponseEntity<List<Category>> findAll() {
-
 		List<Category> list = service.findAll();
-
 		return ResponseEntity.ok().body(list);
-
 	}
-	@GetMapping(value="/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Long id){
-		
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Category> findById(@PathVariable Long id) {
 		Category obj = service.findById(id);
-		
 		return ResponseEntity.ok().body(obj);
 	}
-
 }

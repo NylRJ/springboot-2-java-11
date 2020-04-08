@@ -22,7 +22,6 @@ import com.i9develop.couse.entities.enums.OrderStatus;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,21 +30,20 @@ public class Order implements Serializable {
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-
-	Integer orderStatus;
+	
+	private Integer orderStatus;
 
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
-	
+
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
 	
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private Payment payment;
-
+	
 	public Order() {
-
 	}
 
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
@@ -71,36 +69,25 @@ public class Order implements Serializable {
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
+	
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		
 		if (orderStatus != null) {
 			this.orderStatus = orderStatus.getCode();
 		}
-
-		
-
-	}
-
-	public OrderStatus getOrderStatus() {
-
-		return OrderStatus.valueOf(this.orderStatus);
 	}
 
 	public User getClient() {
-		return client;	
+		return client;
 	}
 
 	public void setClient(User client) {
 		this.client = client;
 	}
 
-	public Set<OrderItem> getItem(){
-		return items;
-	}
-	
-	
-	
 	public Payment getPayment() {
 		return payment;
 	}
@@ -109,16 +96,18 @@ public class Order implements Serializable {
 		this.payment = payment;
 	}
 	
-	public Double getTotal() {
-		Double total = 0.0;
-		
-		for (OrderItem orderItem : items) {
-			total += orderItem.getSubTotal();
-		}
-		
-		return total; 
+	public Set<OrderItem> getItems() {
+		return items;
 	}
-
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		for (OrderItem x : items) {
+			sum += x.getSubTotal();
+		}
+		return sum;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,5 +132,4 @@ public class Order implements Serializable {
 			return false;
 		return true;
 	}
-
 }

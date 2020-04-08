@@ -1,7 +1,5 @@
 package com.i9develop.couse.services;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,20 +11,16 @@ import com.i9develop.couse.repositories.ProductRepository;
 
 @Service
 public class ProductService {
-	
+
 	@Autowired
-	private ProductRepository userRepository;
+	private ProductRepository repository;
 	
-	public List<Product> findAll(){
-		
-		return userRepository.findAll();
+	public List<Product> findAll() {
+		return repository.findAll();
 	}
 	
 	public Product findById(Long id) {
-		
-		Optional<Product> obj = userRepository.findById(id);
-		
+		Optional<Product> obj = repository.findById(id);
 		return obj.get();
 	}
-
 }
