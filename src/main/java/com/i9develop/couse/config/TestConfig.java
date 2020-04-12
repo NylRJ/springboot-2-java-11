@@ -22,7 +22,7 @@ import com.i9develop.couse.repositories.ProductRepository;
 import com.i9develop.couse.repositories.UserRepository;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
